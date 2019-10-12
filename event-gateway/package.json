@@ -5,6 +5,7 @@
   "scripts": {
     "build": "tsc --outDir build/",
     "start": "ts-node ./src/Server.ts",
+    "start:js": "node ./build/Server.js",
     "lint": "eslint --parser @typescript-eslint/parser --ext .ts .",
     "typecheck": "tsc --noEmit",
     "test": "yarn lint && yarn typecheck",
