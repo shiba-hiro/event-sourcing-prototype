@@ -1,6 +1,6 @@
 #!/bin/bash
-
 set -e
+cd `dirname $0`
 
 IMAGE=gcr.io/`gcloud config get-value project --configuration event-source`/default/event-gateway
 
