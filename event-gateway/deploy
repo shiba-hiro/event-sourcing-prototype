@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+IMAGE=gcr.io/`gcloud config get-value project --configuration event-source`/default/event-gateway
+
+gcloud builds submit --tag $IMAGE
+gcloud beta run deploy --image $IMAGE --platform managed
+
