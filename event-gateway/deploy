@@ -2,8 +2,17 @@
 set -e
 cd `dirname $0`
 
-IMAGE=gcr.io/`gcloud config get-value project --configuration event-source`/default/event-gateway
+PROJECT_ID=`gcloud config get-value project --configuration event-source`
+IMAGE=gcr.io/$PROJECT_ID/default/event-gateway
 
-gcloud builds submit --tag $IMAGE
-gcloud beta run deploy --image $IMAGE --platform managed
+cp gcloud-configs/event-gateway-iam.json ./
 
+gcloud builds submit \
+  --tag $IMAGE
+gcloud beta run deploy event-gateway \
+  --image $IMAGE \
+  --platform managed \
+  --set-env-vars PROJECT_ID=$PROJECT_ID,KEY_FILENAME=/usr/src/app/event-gateway-iam.json \
+  --region asia-northeast1
+
+rm ./event-gateway-iam.json

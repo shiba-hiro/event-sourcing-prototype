@@ -5,4 +5,4 @@ COPY yarn.lock ./
 RUN yarn install --only=production
 COPY . ./
 RUN yarn build
-CMD [ "yarn", "start:js" ]
+CMD [ "yarn", "start" ]

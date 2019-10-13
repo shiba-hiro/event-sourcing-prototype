@@ -3,7 +3,7 @@ import Logger from '../Logger';
 
 const HealthCheckController: Router = Router();
 
-HealthCheckController.get('/', async (req: Request, res: Response) => {
+HealthCheckController.get('/', (req: Request, res: Response) => {
   Logger.info('health-check endpoint is called');
 
   const appState = {
