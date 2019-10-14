@@ -1,11 +1,10 @@
 {
-  "name": "event-gateway",
+  "name": "reservation-event-publisher",
   "version": "0.0.1",
-  "main": "dist/Server.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "PROJECT_ID=`gcloud config get-value project --configuration event-source` KEY_FILENAME=gcloud-configs/event-gateway-iam.json ts-node ./src/Server.ts",
-    "build": "tsc --outDir dist/",
-    "start": "node ./dist/Server.js",
+    "build": "tsc --outDir ./dist",
+    "start": "node /index.js",
     "lint": "eslint --parser @typescript-eslint/parser --ext .ts .",
     "typecheck": "tsc --noEmit",
     "test": "yarn lint && yarn typecheck",
@@ -14,15 +13,8 @@
   },
   "author": "Hirofumi Shibata",
   "license": "MIT",
-  "dependencies": {
-    "@google-cloud/firestore": "^2.4.0",
-    "express": "^4.17.1",
-    "log4js": "^5.2.2",
-    "uuid": "^3.3.3"
-  },
   "devDependencies": {
-    "@types/express": "^4.17.1",
-    "@types/uuid": "^3.4.5",
+    "@types/node": "^12.7.12",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",
     "eslint": "^6.5.1",

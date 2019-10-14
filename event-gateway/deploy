@@ -5,6 +5,7 @@ cd `dirname $0`
 PROJECT_ID=`gcloud config get-value project --configuration event-source`
 IMAGE=gcr.io/$PROJECT_ID/default/event-gateway
 
+# Copy to deploy as not git-ignored file
 cp gcloud-configs/event-gateway-iam.json ./
 
 gcloud builds submit \
@@ -15,4 +16,5 @@ gcloud beta run deploy event-gateway \
   --set-env-vars PROJECT_ID=$PROJECT_ID,KEY_FILENAME=/usr/src/app/event-gateway-iam.json \
   --region asia-northeast1
 
+# Clean up
 rm ./event-gateway-iam.json

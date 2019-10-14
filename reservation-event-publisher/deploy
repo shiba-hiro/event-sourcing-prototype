@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+cd `dirname $0`
+
+PROJECT_ID=`gcloud config get-value project --configuration event-source`
+
+# Copy from dist to deploy as not git-ignored file
+cp ./dist/index.js ./index.js
+
+gcloud functions deploy publishReservationCreationEventToSource \
+  --region asia-northeast1 \
+  --memory 128MB \
+  --retry \
+  --runtime nodejs10 \
+  --trigger-event providers/cloud.firestore/eventTypes/document.create \
+  --trigger-resource projects/${PROJECT_ID}/databases/\(default\)/documents/reservation-creation-events/{eventId}
+
+# Clean up
+rm ./index.js

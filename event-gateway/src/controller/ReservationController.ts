@@ -19,10 +19,12 @@ ReservationController.post('/', (req: Request, res: Response) => {
   }
 
   const eventId = uuid();
+  const reservationId = uuid();
   const creation = Firestore
     .collection('reservation-creation-events')
     .doc(eventId)
     .set({
+      reservationId,
       from: req.body.from,
       to: req.body.to,
       unit: Number(req.body.unit),
@@ -35,6 +37,7 @@ ReservationController.post('/', (req: Request, res: Response) => {
         .status(202)
         .send({
           eventId,
+          reservationId,
         });
     }).catch((error) => {
       Logger.error(error);
