@@ -13,6 +13,9 @@
   },
   "author": "Hirofumi Shibata",
   "license": "MIT",
+  "dependencies": {
+    "@google-cloud/pubsub": "^1.1.2"
+  },
   "devDependencies": {
     "@types/node": "^12.7.12",
     "@typescript-eslint/eslint-plugin": "^2.3.3",

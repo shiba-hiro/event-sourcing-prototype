@@ -6,7 +6,7 @@ PROJECT_ID=`gcloud config get-value project --configuration event-source`
 IMAGE=gcr.io/$PROJECT_ID/default/event-gateway
 
 # Copy to deploy as not git-ignored file
-cp gcloud-configs/event-gateway-iam.json ./
+cp ../gcloud-configs/event-gateway-iam.json ./
 
 gcloud builds submit \
   --tag $IMAGE

@@ -6,6 +6,7 @@ PROJECT_ID=`gcloud config get-value project --configuration event-source`
 
 # Copy from dist to deploy as not git-ignored file
 cp ./dist/index.js ./index.js
+cp ../gcloud-configs/pubsub-publisher.json ./pubsub-publisher.json
 
 gcloud functions deploy publishReservationCreationEventToSource \
   --region asia-northeast1 \
@@ -13,7 +14,9 @@ gcloud functions deploy publishReservationCreationEventToSource \
   --retry \
   --runtime nodejs10 \
   --trigger-event providers/cloud.firestore/eventTypes/document.create \
-  --trigger-resource projects/${PROJECT_ID}/databases/\(default\)/documents/reservation-creation-events/{eventId}
+  --trigger-resource projects/$PROJECT_ID/databases/\(default\)/documents/reservation-creation-events/{eventId} \
+  --set-env-vars PROJECT_ID=$PROJECT_ID,GOOGLE_APPLICATION_CREDENTIALS=./pubsub-publisher.json
 
 # Clean up
 rm ./index.js
+rm ./pubsub-publisher.json
