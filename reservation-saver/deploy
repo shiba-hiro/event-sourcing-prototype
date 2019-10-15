@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+cd `dirname $0`
+
+PROJECT_ID=`gcloud config get-value project --configuration event-source`
+
+# Copy from dist to deploy as not git-ignored file
+cp ./dist/index.js ./index.js
+cp ../gcloud-configs/reservation-saver-iam.json ./reservation-saver-iam.json
+
+gcloud functions deploy storeSubmittedReservation \
+  --region asia-northeast1 \
+  --memory 128MB \
+  --retry \
+  --runtime nodejs10 \
+  --trigger-event google.pubsub.topic.publish \
+  --trigger-resource reservation-creation-events \
+  --set-env-vars PROJECT_ID=$PROJECT_ID,KEY_FILENAME=./reservation-saver-iam.json
+
+# Clean up
+rm ./index.js
+rm ./reservation-saver-iam.json

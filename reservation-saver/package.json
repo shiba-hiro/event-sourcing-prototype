@@ -1,0 +1,31 @@
+{
+  "name": "reservation-saver",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --outDir ./dist",
+    "start": "node /index.js",
+    "lint": "eslint --parser @typescript-eslint/parser --ext .ts .",
+    "typecheck": "tsc --noEmit",
+    "test": "yarn lint && yarn typecheck",
+    "precommit": "yarn test",
+    "deploy": "yarn test && yarn build && ./deploy"
+  },
+  "author": "Hirofumi Shibata",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/firestore": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.12",
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  }
+}
