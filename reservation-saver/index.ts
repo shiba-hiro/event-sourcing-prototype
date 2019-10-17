@@ -13,29 +13,29 @@ interface EventParameter {
   timestamp: {integerValue: string};
 }
 
-const storeSubmittedReservation = async (event: Record<string, any>) => {
+const storeSubmittedReservation = (event: Record<string, any>): Promise<void> => {
   const params = JSON.parse(Buffer.from(event.data, 'base64').toString()) as EventParameter;
 
-  try {
-    await db
-      .collection('reservations')
-      .doc(params.reservationId.stringValue)
-      .set({
-        from: params.from.stringValue,
-        to: params.to.stringValue,
-        unit: Number(params.unit.integerValue),
-        createdAt: Number(params.timestamp.integerValue),
-        status: 'isSubmitting',
-        creationValidations: {
-          reservation: 'passed',
-        },
-      });
-  } catch (error) {
-    console.error(`Failed to store the reservation: ${params.reservationId.stringValue}`);
-    console.error(error);
-    throw error;
-  }
-  console.log(`Successfully stored the reservation: ${params.reservationId.stringValue}`);
+  return db
+    .collection('reservations')
+    .doc(params.reservationId.stringValue)
+    .set({
+      from: params.from.stringValue,
+      to: params.to.stringValue,
+      unit: Number(params.unit.integerValue),
+      createdAt: Number(params.timestamp.integerValue),
+      status: 'isSubmitting',
+      creationValidations: {
+        reservation: 'passed',
+      },
+    }).then(() => {
+      console.log(`Successfully stored the reservation: ${params.reservationId.stringValue}`);
+    })
+    .catch((error) => {
+      console.error(`Failed to store the reservation: ${params.reservationId.stringValue}`);
+      console.error(error);
+      throw error;
+    });
 };
 
 export {
