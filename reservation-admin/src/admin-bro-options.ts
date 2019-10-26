@@ -11,6 +11,26 @@ const opts: AdminBroOptions = {
         listProperties: ['id', 'title'],
         editProperties: ['title', 'content'],
         sort: { direction: 'asc' as ('asc' | 'desc'), sortBy: 'id' },
+        actions: {
+          edit: {
+            name: 'edit',
+            isAccessible: false,
+            handler: async () => {},
+            actionType: 'record',
+          },
+          delete: {
+            name: 'delete',
+            isAccessible: false,
+            handler: async () => {},
+            actionType: 'record',
+          },
+          new: {
+            name: 'new',
+            isAccessible: false,
+            handler: async () => {},
+            actionType: 'record',
+          },
+        },
       },
     },
   ],
