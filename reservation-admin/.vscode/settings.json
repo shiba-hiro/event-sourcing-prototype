@@ -1,0 +1,12 @@
+ 
+{
+  "git.ignoreLimitWarning": true,
+  "[typescript]": {
+    "editor.detectIndentation": true,
+    "editor.tabSize": 2,
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    { "language": "typescript", "autoFix": true },
+  ],
+}
