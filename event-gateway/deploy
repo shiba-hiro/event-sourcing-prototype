@@ -9,8 +9,10 @@ IMAGE=gcr.io/$PROJECT_ID/default/event-gateway
 cp ../gcloud-configs/event-gateway-iam.json ./
 
 gcloud builds submit \
+  --project $PROJECT_ID \
   --tag $IMAGE
 gcloud beta run deploy event-gateway \
+  --project $PROJECT_ID \
   --image $IMAGE \
   --platform managed \
   --set-env-vars PROJECT_ID=$PROJECT_ID,KEY_FILENAME=/usr/src/app/event-gateway-iam.json \

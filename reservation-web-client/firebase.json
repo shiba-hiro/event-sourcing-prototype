@@ -8,6 +8,13 @@
     ],
     "rewrites": [
       {
+        "source": "/events/api/v1/**",
+        "run": {
+          "serviceId": "event-gateway",
+          "region": "asia-northeast1"
+        }
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
