@@ -1,0 +1,19 @@
+ 
+{
+  "git.ignoreLimitWarning": true,
+  "[typescript]": {
+    "editor.detectIndentation": true,
+    "editor.tabSize": 2,
+  },
+  "[tsx]": {
+    "editor.detectIndentation": true,
+    "editor.tabSize": 2,
+  },
+  "eslint.validate": [
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+}
