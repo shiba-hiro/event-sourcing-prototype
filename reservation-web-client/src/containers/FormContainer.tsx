@@ -5,7 +5,7 @@ import { Form, SimpleToaster } from '../components';
 const FormContainer: React.FC = () => {
   const [toasterState, setToasterState] = useState<{show: boolean; succeeded: boolean}>({ show: false, succeeded: false });
   const handleSubmit = useCallback(({ from, to, unit }) => {
-    fetch('/events/api/v1/reservations', {
+    fetch(`${process.env.REACT_APP_RESERVATION_API_HOST}/events/api/v1/reservations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
