@@ -1,9 +1,12 @@
 import { Router, Request, Response } from 'express';
 import uuid from 'uuid/v4';
 import Logger from '../Logger';
+import firebaseMiddleware from '../middleware/Firebase';
 import Firestore from '../Database';
 
 const ReservationController: Router = Router();
+
+ReservationController.use(firebaseMiddleware);
 
 ReservationController.post('/', (req: Request, res: Response) => {
   Logger.info('POST reservation endpoint is called');
