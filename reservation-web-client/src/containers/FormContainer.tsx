@@ -5,8 +5,11 @@ import { Form, SimpleToaster } from '../components';
 
 const FormContainer: React.FC = () => {
   const [toasterState, setToasterState] = useState<{show: boolean; succeeded: boolean}>({ show: false, succeeded: false });
+  const [isSubmitting, setSubmitting] = useState<boolean>(false);
 
   const handleSubmit = useCallback(({ from, to, unit }) => {
+    setSubmitting(true);
+
     const user = firebase.auth().currentUser;
 
     if (!user) {
@@ -15,6 +18,7 @@ const FormContainer: React.FC = () => {
         show: true,
         succeeded: false,
       });
+      setSubmitting(false);
       return;
     }
 
@@ -46,6 +50,9 @@ const FormContainer: React.FC = () => {
           show: true,
           succeeded: false,
         });
+      })
+      .finally(() => {
+        setSubmitting(false);
       });
   }, []);
 
@@ -55,7 +62,10 @@ const FormContainer: React.FC = () => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} />
+      <Form
+        onSubmit={handleSubmit}
+        disabled={isSubmitting}
+      />
       <SimpleToaster
         show={toasterState.show}
         succeeded={toasterState.succeeded}

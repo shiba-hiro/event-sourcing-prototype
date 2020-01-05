@@ -13,6 +13,9 @@ const firebaseConfig = {
 
 const initFirebaseApp = (): void => {
   firebase.initializeApp(firebaseConfig);
+  firebase
+    .auth()
+    .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 };
 
 const authUIConfig = {
@@ -26,6 +29,7 @@ const authUIConfig = {
   callbacks: {
     signInSuccessWithAuthResult: () => false,
   },
+  credentialHelper: 'none',
 };
 
 export {
